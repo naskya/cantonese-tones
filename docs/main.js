@@ -1,6 +1,6 @@
 const dictionary = (() => {
   const request = new XMLHttpRequest();
-  request.open("get", "../data/cccedict-canto-readings-150923.txt", false);
+  request.open("get", "cccedict-canto-readings-150923.txt", false);
   request.send(null);
 
   const data = request.responseText.split("\n");

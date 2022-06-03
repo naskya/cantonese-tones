@@ -29,6 +29,9 @@ const tableElem = document.getElementById("table");
 const failedElem = document.getElementById("failed");
 const failedDescElem = document.getElementById("failed-description");
 const failedWordsElem = document.getElementById("failed-words");
+const detailElem = document.getElementById("detail");
+const tonesElem = document.getElementById("tones");
+const jyutpingElem = document.getElementById("jyutping");
 
 const cellElems = (() => {
   let result = [];
@@ -44,6 +47,7 @@ const cellElems = (() => {
 function init(useSimplified) {
   failedElem.classList.add("hidden");
   tableElem.classList.add("hidden");
+  detailElem.classList.add("hidden");
 
   failedDescElem.innerText = "";
   failedWordsElem.innerHTML = "";
@@ -100,13 +104,41 @@ function e() {
     } else {
       const first = dictionary[convertedWordIndices[i]][2];
       const second = dictionary[convertedWordIndices[i]][3];
-      const elem = cellElems[Number(first[first.length - 1])][Number(second[second.length - 1])];
-      if (elem.innerHTML.length > 0) {
-        elem.innerHTML += "&nbsp;";
+      const cellElem = cellElems[Number(first[first.length - 1])][Number(second[second.length - 1])];
+      if (cellElem.innerHTML.length > 0) {
+        cellElem.innerHTML += "&nbsp;";
       }
-      elem.innerHTML += dictionary[convertedWordIndices[i]][useSimplified ? 1 : 0];
+      cellElem.innerHTML += dictionary[convertedWordIndices[i]][useSimplified ? 1 : 0];
     }
   }
 
   failedWordsElem.innerHTML += "</ul>";
+}
+
+const img1Elem = document.getElementById("img1");
+const img2Elem = document.getElementById("img2");
+
+function s(u, v) {
+  jyutpingElem.innerHTML = "";
+  tonesElem.innerHTML = `${u} 声 - ${v} 声`;
+
+  detailElem.classList.remove("hidden");
+  img1Elem.setAttribute("src", `./img/${u}.svg`);
+  img2Elem.setAttribute("src", `./img/${v}.svg`);
+
+  // ToDo: improve the algorithm
+  const words = cellElems[u][v].innerHTML.split("&nbsp;");
+
+  for (let i = 0; i < words.length; ++i) {
+    for (let j = 0; j < dictionary.length; ++j) {
+      if (words[i] === dictionary[j][0] || words[i] === dictionary[j][1]) {
+        if (jyutpingElem.innerHTML.length > 0) {
+          console.log(1);
+          jyutpingElem.innerHTML += ",&nbsp;";
+        }
+        jyutpingElem.innerHTML += `${words[i]}:&nbsp;${dictionary[j][2]}&nbsp;${dictionary[j][3]}`;
+        break;
+      }
+    }
+  }
 }

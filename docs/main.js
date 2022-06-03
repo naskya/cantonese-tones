@@ -63,6 +63,10 @@ function init(useSimplified) {
 }
 
 function e() {
+  if (inputElem.value === "") {
+    return;
+  }
+
   const useSimplified = (document.querySelector("input[name=character-set]:checked").value === "simplified");
   init(useSimplified);
 

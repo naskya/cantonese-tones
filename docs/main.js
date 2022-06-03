@@ -1,24 +1,69 @@
 const dictionary = (() => {
-  const request = new XMLHttpRequest();
-  request.open("get", "cccedict-canto-readings-150923.txt", false);
-  request.send(null);
-
-  const data = request.responseText.split("\n");
-
   let result = [];
 
-  for (let i = 0; i < data.length; ++i) {
-    if (data[i].length === 0 || data[i][0] === "#") {
-      continue;
+  {
+    const request = new XMLHttpRequest();
+    request.open("get", "cccanto-webdist.txt", false);
+    request.send(null);
+
+    const data = request.responseText.split("\n");
+
+    for (let i = 0; i < data.length; ++i) {
+      if (data[i].length === 0 || data[i][0] === "#") {
+        continue;
+      }
+
+      const line = data[i].split(" ");
+
+      if (line[0].length !== 2) {
+        continue;
+      }
+
+      let first, second;
+
+      for (let j = 2; j < line.length; ++j) {
+        if (line[j].startsWith("{")) {
+          if (line[j].endsWith("}")) {
+            for (let k = 1; k < line[j].length - 1; ++k) {
+              if (line[j][k] == "1" || line[j][k] == "2" || line[j][k] == "3"
+                || line[j][k] == "4" || line[j][k] == "5" || line[j][k] == "6") {
+                first = line[j].slice(1, k + 1);
+                second = line[j].slice(k + 1, -1);
+                break;
+              }
+            }
+          } else {
+            first = line[j].slice(1);
+            second = line[j + 1].slice(0, -1);
+          }
+          break;
+        }
+      }
+
+      result.push([line[0], line[1], first, second]);
     }
+  }
 
-    const line = data[i].split(" ");
+  {
+    const request = new XMLHttpRequest();
+    request.open("get", "cccedict-canto-readings-150923.txt", false);
+    request.send(null);
 
-    if (line[0].length !== 2) {
-      continue;
+    const data = request.responseText.split("\n");
+
+    for (let i = 0; i < data.length; ++i) {
+      if (data[i].length === 0 || data[i][0] === "#") {
+        continue;
+      }
+
+      const line = data[i].split(" ");
+
+      if (line[0].length !== 2) {
+        continue;
+      }
+
+      result.push([line[0], line[1], line[line.length - 2].slice(1), line[line.length - 1].slice(0, -1)]);
     }
-
-    result.push([line[0], line[1], line[line.length - 2].slice(1), line[line.length - 1].slice(0, -1)]);
   }
 
   return result;
@@ -133,7 +178,6 @@ function s(u, v) {
     for (let j = 0; j < dictionary.length; ++j) {
       if (words[i] === dictionary[j][0] || words[i] === dictionary[j][1]) {
         if (jyutpingElem.innerHTML.length > 0) {
-          console.log(1);
           jyutpingElem.innerHTML += ",&nbsp;";
         }
         jyutpingElem.innerHTML += `${words[i]}:&nbsp;${dictionary[j][2]}&nbsp;${dictionary[j][3]}`;

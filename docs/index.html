@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <title>Cantonese Tones</title>
+  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Cantonese Tones</h1>
+    <p>広東語の二字の単語を声調の組み合わせによって分類します。</p>
+  </div>
+  <div class="container">
+    <h2>単語リスト</h2>
+    <p>単語は空白・カンマ・改行のいずれかで区切って入力してください。入力した内容は外部に送信されません。</p>
+    <textarea id="word-list-input" rows="5"></textarea>
+    <h2>表示する字体</h2>
+    <p>表示する字体を選択してください。自動で変換されるため、入力リストの内容と異なっていてもよいです。</p>
+    <div>
+      <input type="radio" name="character-set" value="traditional" checked="checked"><label
+        for="traditional">繁体字</label>
+    </div>
+    <div>
+      <input type="radio" name="character-set" value="simplified"><label for="simplified">簡体字</label>
+    </div>
+    <button id="exec-button" type="button" onclick="javascript:e()">分類する</button>
+  </div>
+
+  <div id="failed" class="container hidden">
+    <h2>分類に失敗した単語</h2>
+    <p id="failed-description"></p>
+    <div id="failed-words" class="container"></div>
+  </div>
+  <div id="table" class="container hidden">
+    <h2>声調によって分類した表</h2>
+    <table>
+      <tr>
+        <th id="c00" class="table-leftmost-cell"></th>
+        <th id="c01">1</th>
+        <th id="c02">2</th>
+        <th id="c03">3</th>
+        <th id="c04">4</th>
+        <th id="c05">5</th>
+        <th id="c06">6</th>
+      </tr>
+      <tr>
+        <th id="c10" class="table-leftmost-cell">1</th>
+        <td id="c11" class="table-word-cell"></td>
+        <td id="c12" class="table-word-cell"></td>
+        <td id="c13" class="table-word-cell"></td>
+        <td id="c14" class="table-word-cell"></td>
+        <td id="c15" class="table-word-cell"></td>
+        <td id="c16" class="table-word-cell"></td>
+      </tr>
+      <tr>
+        <th id="c20" class="table-leftmost-cell">2</th>
+        <td id="c21" class="table-word-cell"></td>
+        <td id="c22" class="table-word-cell"></td>
+        <td id="c23" class="table-word-cell"></td>
+        <td id="c24" class="table-word-cell"></td>
+        <td id="c25" class="table-word-cell"></td>
+        <td id="c26" class="table-word-cell"></td>
+      </tr>
+      <tr>
+        <th id="c30" class="table-leftmost-cell">3</th>
+        <td id="c31" class="table-word-cell"></td>
+        <td id="c32" class="table-word-cell"></td>
+        <td id="c33" class="table-word-cell"></td>
+        <td id="c34" class="table-word-cell"></td>
+        <td id="c35" class="table-word-cell"></td>
+        <td id="c36" class="table-word-cell"></td>
+      </tr>
+      <tr>
+        <th id="c40" class="table-leftmost-cell">4</th>
+        <td id="c41" class="table-word-cell"></td>
+        <td id="c42" class="table-word-cell"></td>
+        <td id="c43" class="table-word-cell"></td>
+        <td id="c44" class="table-word-cell"></td>
+        <td id="c45" class="table-word-cell"></td>
+        <td id="c46" class="table-word-cell"></td>
+      </tr>
+      <tr>
+        <th id="c50" class="table-leftmost-cell">5</th>
+        <td id="c51" class="table-word-cell"></td>
+        <td id="c52" class="table-word-cell"></td>
+        <td id="c53" class="table-word-cell"></td>
+        <td id="c54" class="table-word-cell"></td>
+        <td id="c55" class="table-word-cell"></td>
+        <td id="c56" class="table-word-cell"></td>
+      </tr>
+      <tr>
+        <th id="c60" class="table-leftmost-cell">6</th>
+        <td id="c61" class="table-word-cell"></td>
+        <td id="c62" class="table-word-cell"></td>
+        <td id="c63" class="table-word-cell"></td>
+        <td id="c64" class="table-word-cell"></td>
+        <td id="c65" class="table-word-cell"></td>
+        <td id="c66" class="table-word-cell"></td>
+      </tr>
+    </table>
+  </div>
+
+  <footer class="container" role="attribution">
+    <q><a href="https://cantonese.org/">CC-CEDICT Cantonese Readings</a></q> by Pleco Software Incorporated is
+    licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.
+  </footer>
+  <script src='main.js'></script>
+</body>
+
+</html>

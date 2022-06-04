@@ -97,6 +97,14 @@ function init(useSimplified) {
   failedDescElem.innerText = "";
   failedWordsElem.innerHTML = "";
 
+  if (useSimplified) {
+    jyutpingElem.classList.add("simplified");
+    jyutpingElem.classList.remove("traditional");
+  } else {
+    jyutpingElem.classList.add("traditional");
+    jyutpingElem.classList.remove("simplified");
+  }
+
   for (let i = 1; i <= 6; ++i) {
     for (let j = 1; j <= 6; ++j) {
       cellElems[i][j].innerText = "";
@@ -168,8 +176,8 @@ function s(u, v) {
   tonesElem.innerHTML = `${u} 声 - ${v} 声`;
 
   detailElem.classList.remove("hidden");
-  img1Elem.setAttribute("src", `./img/${u}.svg`);
-  img2Elem.setAttribute("src", `./img/${v}.svg`);
+  img1Elem.setAttribute("src", `img/${u}.svg`);
+  img2Elem.setAttribute("src", `img/${v}.svg`);
 
   // ToDo: improve the algorithm
   const words = cellElems[u][v].innerHTML.split("&nbsp;");

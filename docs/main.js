@@ -120,14 +120,14 @@ function init(useSimplified) {
 }
 
 function e() {
-  if (inputElem.value === "") {
+  const words = inputElem.value.replace(/[\s,　，]+/g, ",").replace(/^,|,$/g, "").split(",");
+
+  if (words.length === 1 && words[0] === "") {
     return;
   }
 
   const useSimplified = (document.querySelector("input[name=character-set]:checked").value === "simplified");
   init(useSimplified);
-
-  const words = inputElem.value.replace(/[\s,　，]+/g, ",").replace(/^,|,$/g, "").split(",");
 
   let convertedWordIndices = Array(words.length).fill(-1);
   let numberFailed = 0;

@@ -3,7 +3,7 @@ const dictionary = (() => {
 
   {
     const request = new XMLHttpRequest();
-    request.open("get", "cccanto-webdist.txt", false);
+    request.open("get", "dict/cccanto-webdist.txt", false);
     request.send(null);
 
     const data = request.responseText.split("\n");
@@ -46,7 +46,7 @@ const dictionary = (() => {
 
   {
     const request = new XMLHttpRequest();
-    request.open("get", "cccedict-canto-readings-150923.txt", false);
+    request.open("get", "dict/cccedict-canto-readings-150923.txt", false);
     request.send(null);
 
     const data = request.responseText.split("\n");

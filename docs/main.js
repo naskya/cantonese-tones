@@ -1,3 +1,5 @@
+const numberOfTones = 6;
+
 const dictionary = (() => {
   let result = [];
 
@@ -80,9 +82,9 @@ const jyutpingElem = document.getElementById("jyutping");
 
 const cellElems = (() => {
   let result = [];
-  for (let i = 0; i <= 6; ++i) {
+  for (let i = 0; i <= numberOfTones; ++i) {
     result.push([]);
-    for (let j = 0; j <= 6; ++j) {
+    for (let j = 0; j <= numberOfTones; ++j) {
       result[i].push(document.getElementById(`c${i}${j}`));
     }
   }
@@ -105,8 +107,8 @@ function init(useSimplified) {
     jyutpingElem.classList.remove("simplified");
   }
 
-  for (let i = 1; i <= 6; ++i) {
-    for (let j = 1; j <= 6; ++j) {
+  for (let i = 1; i <= numberOfTones; ++i) {
+    for (let j = 1; j <= numberOfTones; ++j) {
       cellElems[i][j].innerText = "";
       if (useSimplified) {
         cellElems[i][j].classList.add("simplified");

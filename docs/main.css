@@ -63,6 +63,19 @@ img {
   width: 50%;
 }
 
+.copy-button {
+  border: none;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: small;
+  background-color: hsl(225, 80%, 60%);
+  color: white;
+}
+
 .container {
   margin: 20px auto;
   max-width: 960px;

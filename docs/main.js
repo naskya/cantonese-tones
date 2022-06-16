@@ -196,3 +196,16 @@ function s(u, v) {
     }
   }
 }
+
+function c() {
+  let textToBeCopied = "";
+
+  for (let i = 1; i <= numberOfTones; ++i) {
+    for (let j = 1; j <= numberOfTones; ++j) {
+      textToBeCopied += cellElems[i][j].innerText;
+      textToBeCopied += (j == numberOfTones ? "\n" : ",");
+    }
+  }
+
+  navigator.clipboard.writeText(textToBeCopied);
+}
